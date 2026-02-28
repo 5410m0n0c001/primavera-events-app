@@ -33,11 +33,11 @@ router.get('/availability', async (req, res) => {
 
         // 2. Calculate reserved quantities
         const reservedMap: Record<string, number> = {};
-        conflictEvents.forEach(event => {
+        conflictEvents.forEach((event: any) => {
             // Take the accepted quote (assuming 1 per event for now)
             const acceptedQuote = event.quotes[0];
             if (acceptedQuote) {
-                acceptedQuote.items.forEach(qItem => {
+                acceptedQuote.items.forEach((qItem: any) => {
                     reservedMap[qItem.serviceItemId] = (reservedMap[qItem.serviceItemId] || 0) + qItem.quantity;
                 });
             }
@@ -49,7 +49,7 @@ router.get('/availability', async (req, res) => {
         });
 
         // 4. Map availability
-        const availability = allItems.map(item => {
+        const availability = allItems.map((item: any) => {
             const reserved = reservedMap[item.id] || 0;
             return {
                 ...item,
