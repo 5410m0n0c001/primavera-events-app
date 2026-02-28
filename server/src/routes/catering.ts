@@ -48,7 +48,7 @@ router.post('/dishes', async (req, res) => {
             const ingredients = await prisma.ingredient.findMany({ where: { id: { in: ingIds } } });
 
             recipeItems.forEach((r: any) => {
-                const ing = ingredients.find(i => i.id === r.ingredientId);
+                const ing = ingredients.find((i: any) => i.id === r.ingredientId);
                 if (ing) {
                     calculatedCost += parseFloat(ing.costPerUnit.toString()) * r.quantity;
                 }

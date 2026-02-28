@@ -19,7 +19,7 @@ router.get('/dashboard', async (req, res) => {
         });
 
         const monthlyRevenue = new Array(12).fill(0);
-        payments.forEach(p => {
+        payments.forEach((p: any) => {
             const month = new Date(p.date).getMonth();
             monthlyRevenue[month] += parseFloat(p.amount.toString());
         });
@@ -27,7 +27,7 @@ router.get('/dashboard', async (req, res) => {
         // 2. Event Distribution (by Type)
         const events = await prisma.event.findMany();
         const eventDistribution: Record<string, number> = {};
-        events.forEach(e => {
+        events.forEach((e: any) => {
             const type = e.type || 'Otros';
             eventDistribution[type] = (eventDistribution[type] || 0) + 1;
         });
@@ -39,7 +39,7 @@ router.get('/dashboard', async (req, res) => {
                 _all: true
             }
         });
-        const pipeline = clients.map(c => ({
+        const pipeline = clients.map((c: any) => ({
             name: c.type,
             value: c._count._all
         }));

@@ -10,12 +10,12 @@ router.get('/stats', async (req, res) => {
         const payments = await prisma.payment.findMany();
         const expenses = await prisma.expense.findMany();
 
-        const totalIncome = payments.reduce((sum, p) => sum + parseFloat(p.amount.toString()), 0);
-        const totalExpenses = expenses.reduce((sum, e) => sum + parseFloat(e.amount.toString()), 0);
+        const totalIncome = payments.reduce((sum: any, p: any) => sum + parseFloat(p.amount.toString()), 0);
+        const totalExpenses = expenses.reduce((sum: any, e: any) => sum + parseFloat(e.amount.toString()), 0);
         const netProfit = totalIncome - totalExpenses;
 
-        const pendingIncome = payments.filter(p => p.status === 'Pendiente').reduce((sum, p) => sum + parseFloat(p.amount.toString()), 0);
-        const pendingExpenses = expenses.filter(e => e.status === 'Pendiente').reduce((sum, e) => sum + parseFloat(e.amount.toString()), 0);
+        const pendingIncome = payments.filter((p: any) => p.status === 'Pendiente').reduce((sum: any, p: any) => sum + parseFloat(p.amount.toString()), 0);
+        const pendingExpenses = expenses.filter((e: any) => e.status === 'Pendiente').reduce((sum: any, e: any) => sum + parseFloat(e.amount.toString()), 0);
 
         res.json({
             totalIncome,
