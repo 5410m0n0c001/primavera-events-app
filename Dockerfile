@@ -19,6 +19,7 @@ COPY . .
 
 # Build the client and server (adjust based on your actual build scripts)
 RUN cd client && npm run build
+RUN cd server && npx prisma generate
 RUN cd server && npm run build
 
 # Expose the port your server runs on (change if your Express server uses a different port)
