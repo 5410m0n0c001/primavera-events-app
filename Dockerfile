@@ -11,6 +11,9 @@ COPY package*.json ./
 COPY server/package.json ./server/
 COPY client/package.json ./client/
 
+# Install OpenSSL for Prisma and libc6-compat
+RUN apk add --no-cache openssl libc6-compat
+
 # Install dependencies (this will install for both root, server, and client because of workspaces or npm install:all)
 RUN npm run install:all || (npm install && cd server && npm install && cd ../client && npm install)
 
