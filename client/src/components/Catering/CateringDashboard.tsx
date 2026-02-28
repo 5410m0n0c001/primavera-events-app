@@ -27,7 +27,7 @@ const CateringDashboard: React.FC = () => {
     const [ingredients, setIngredients] = useState<Ingredient[]>([]);
     const [dishes, setDishes] = useState<Dish[]>([]);
     const [menus, setMenus] = useState<Menu[]>([]);
-    const [loading, setLoading] = useState(true);
+
 
     // Form States
     const [newIngName, setNewIngName] = useState('');
@@ -39,7 +39,6 @@ const CateringDashboard: React.FC = () => {
     }, [view]);
 
     const loadData = async () => {
-        setLoading(true);
         try {
             if (view === 'ingredients') {
                 const res = await fetch('http://localhost:3000/api/catering/ingredients');
@@ -52,7 +51,6 @@ const CateringDashboard: React.FC = () => {
                 setMenus(await res.json());
             }
         } catch (e) { console.error(e); }
-        finally { setLoading(false); }
     };
 
     const createIngredient = async (e: React.FormEvent) => {
